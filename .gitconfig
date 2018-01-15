@@ -1,0 +1,42 @@
+[user]
+	name = Jonathan Forget
+	email = jno.forget@gmail.com
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+
+[merge]
+	tool = vimdiff
+
+[push]
+	default = simple
+  followTags = true
+
+[alias]
+  prune = fetch --prune
+  cdiff = diff --cached
+  st = status --short
+  log1 = log --all --graph --decorate --oneline --abbrev-commit
+  glog = log --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset'
+  merge-branch = merge --log --no-commit --no-ff
+  push-this = push origin HEAD
+  fix-submodules = submodule update --recursive --init
+  recursive = "!sh -c 'for i in . `git submodule foreach -q --recursive pwd`; do cd $i && git $@; done' -"
+  recursive-sh = "!sh -c 'for i in . `git submodule foreach -q --recursive pwd`; do cd $i && $@; done' -"
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+
+[diff]
+  tool = icdiff
+[difftool]
+  prompt = false
+[difftool "icdiff"]
+  cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
+
+[rerere]
+	enabled = true
