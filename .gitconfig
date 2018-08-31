@@ -32,11 +32,28 @@
 	required = true
 
 [diff]
-  tool = icdiff
+  tool = diff-so-fancy
 [difftool]
   prompt = false
-[difftool "icdiff"]
-  cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
+[difftool "diff-so-fancy"]
+  cmd = /usr/local/bin/diff-so-fancy --line-numbers $LOCAL $REMOTE
 
 [rerere]
 	enabled = true
+
+[pager]
+       diff = diff-so-fancy | less --tabs=1,5 -RFX
+       show = diff-so-fancy | less --tabs=1,5 -RFX
+
+[color "diff-highlight"]
+       oldNormal = red bold
+       oldHighlight = red bold 52
+       newNormal = "#009933 bold"
+       newHighlight = "#009933 bold 22"
+[color "diff"]
+       meta = yellow
+       frag = magenta bold
+       commit = yellow bold
+       old = red bold
+       new = "#009933 bold"
+       whitespace = red reverse
