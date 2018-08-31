@@ -1,0 +1,27 @@
+alias k='kubectl'
+alias kg='kubectl get'
+alias kd='kubectl describe'
+alias kgp='kubectl get pods'
+alias kgns='kubectl get namespaces'
+alias kgall='kubectl get ingress,service,deployment,pod,statefulset'
+# switch between cluster
+alias kuc='kubectl config use-context'
+# set a namespace on the current context to avoid using --namespace all the time
+alias kns='kubectl config set-context "$(kubectl config current-context)" --namespace'
+alias kgc='kubectl config get-contexts'
+alias kex='kubectl exec -it'
+alias kl='kubectl logs'
+# watch all pod ont he cluster
+alias kwatch='kubectl get pods -w --all-namespaces'
+
+# Display current context (cluster)(namespace), can be used in prompt
+kc()
+{
+  kubectl config get-contexts | awk '/^\*/ { print "(" $2 ")" "(" $5 ")" }'
+}
+# Force a rolling update of a deployment
+kru()
+{
+  kubectl patch deployment $1 -p \
+    "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"strukturk8s.com/force-rolling-update\":\"`date +'%s'`\"}}}}}"
+}
